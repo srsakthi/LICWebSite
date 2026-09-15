@@ -1,0 +1,32 @@
+[
+  {
+    "image": "gallery1.svg",
+    "title": "Family Protection",
+    "description": "Comprehensive plans designed to secure your family's financial future."
+  },
+  {
+    "image": "gallery2.svg",
+    "title": "Life Insurance Planning",
+    "description": "LIC life insurance solutions tailored to your long-term goals."
+  },
+  {
+    "image": "gallery3.svg",
+    "title": "Child Education Plan",
+    "description": "Save systematically for your child's education and future milestones."
+  },
+  {
+    "image": "gallery4.svg",
+    "title": "Retirement Planning",
+    "description": "Build a steady income stream for a comfortable, secure retirement."
+  },
+  {
+    "image": "gallery5.svg",
+    "title": "Health Insurance Coverage",
+    "description": "Star Health plans covering hospitalisation and family healthcare needs."
+  },
+  {
+    "image": "gallery6.svg",
+    "title": "Senior Citizen Care",
+    "description": "Dedicated health insurance support for senior citizens and parents."
+  }
+]

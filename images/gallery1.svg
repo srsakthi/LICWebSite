@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-labelledby="g1t">
+  <title id="g1t">Family protection plan illustration</title>
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eaf2ff"/><stop offset="100%" stop-color="#dce8fb"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg1)"/>
+  <circle cx="400" cy="300" r="160" fill="#ffffff" opacity="0.6"/>
+  <g transform="translate(400,330)">
+    <path d="M0 -140 C-95 -140 -175 -70 -175 -40 C-95 -65 0 -65 0 -65 C0 -65 95 -65 175 -40 C175 -70 95 -140 0 -140 Z" fill="#0b3d91"/>
+    <rect x="-6" y="-65" width="12" height="120" rx="6" fill="#8aa1c9"/>
+  </g>
+  <g transform="translate(330,420)">
+    <circle cx="0" cy="0" r="24" fill="#ffd08a"/>
+    <rect x="-18" y="22" width="36" height="60" rx="15" fill="#1657c9"/>
+  </g>
+  <g transform="translate(400,435)">
+    <circle cx="0" cy="0" r="20" fill="#ffcaa8"/>
+    <rect x="-15" y="18" width="30" height="52" rx="13" fill="#12a37f"/>
+  </g>
+  <g transform="translate(465,420)">
+    <circle cx="0" cy="0" r="24" fill="#f4c9a1"/>
+    <rect x="-18" y="22" width="36" height="60" rx="15" fill="#ffc72c"/>
+  </g>
+  <text x="400" y="565" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="26" font-weight="600" fill="#0a2f70">Family Protection</text>
+</svg>

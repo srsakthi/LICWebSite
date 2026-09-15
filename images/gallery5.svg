@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-labelledby="g5t">
+  <title id="g5t">Star Health family coverage illustration</title>
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e9fbf6"/><stop offset="100%" stop-color="#cdf3e6"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg5)"/>
+  <circle cx="400" cy="300" r="160" fill="#ffffff" opacity="0.6"/>
+  <g transform="translate(400,300)">
+    <path d="M0 -100 C-70 -100 -120 -55 -120 0 C-120 65 -55 115 0 135 C55 115 120 65 120 0 C120 -55 70 -100 0 -100 Z" fill="#12a37f"/>
+    <rect x="-14" y="-45" width="28" height="90" rx="6" fill="#ffffff"/>
+    <rect x="-45" y="-14" width="90" height="28" rx="6" fill="#ffffff"/>
+  </g>
+  <text x="400" y="565" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="26" font-weight="600" fill="#0a2f70">Health Insurance Coverage</text>
+</svg>

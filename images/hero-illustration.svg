@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 480" width="560" height="480" role="img" aria-labelledby="heroTitle">
+  <title id="heroTitle">Illustration of a family protected under an insurance umbrella</title>
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#eaf2ff"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="umbrellaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b3d91"/>
+      <stop offset="100%" stop-color="#1657c9"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="280" cy="240" r="220" fill="url(#skyGrad)"/>
+
+  <circle cx="120" cy="100" r="26" fill="#ffc72c" opacity="0.85"/>
+  <circle cx="450" cy="130" r="14" fill="#12a37f" opacity="0.6"/>
+  <circle cx="470" cy="330" r="20" fill="#ffc72c" opacity="0.5"/>
+
+  <path d="M60 420 C160 380 400 380 500 420 L500 430 L60 430 Z" fill="#e6edf9"/>
+
+  <g>
+    <path d="M280 90 C170 90 90 175 90 195 C90 195 150 175 280 175 C410 175 470 195 470 195 C470 175 390 90 280 90 Z" fill="url(#umbrellaGrad)"/>
+    <path d="M90 195 C120 210 140 178 170 195 C200 212 220 178 250 195 C280 212 300 178 330 195 C360 212 380 178 410 195 C440 212 460 178 470 195 L470 198 C440 215 420 182 410 198 C380 215 360 182 330 198 C300 215 280 182 250 198 C220 215 200 182 170 198 C140 215 120 182 90 198 Z" fill="#0a2f70"/>
+    <rect x="276" y="175" width="8" height="150" rx="4" fill="#8aa1c9"/>
+    <path d="M284 300 C284 300 320 300 320 330 C320 350 290 350 284 340" fill="none" stroke="#8aa1c9" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(190,300)">
+    <circle cx="0" cy="0" r="22" fill="#ffd08a"/>
+    <rect x="-16" y="20" width="32" height="55" rx="14" fill="#1657c9"/>
+    <rect x="-14" y="72" width="12" height="42" rx="6" fill="#0a2f70"/>
+    <rect x="2" y="72" width="12" height="42" rx="6" fill="#0a2f70"/>
+  </g>
+
+  <g transform="translate(250,315)">
+    <circle cx="0" cy="0" r="19" fill="#ffcaa8"/>
+    <rect x="-14" y="17" width="28" height="48" rx="12" fill="#12a37f"/>
+    <rect x="-12" y="62" width="10" height="36" rx="5" fill="#0a2f70"/>
+    <rect x="2" y="62" width="10" height="36" rx="5" fill="#0a2f70"/>
+  </g>
+
+  <g transform="translate(305,290)">
+    <circle cx="0" cy="0" r="24" fill="#f4c9a1"/>
+    <path d="M-24 -4 C-24 -20 -8 -30 0 -30 C8 -30 24 -20 24 -4 L24 2 L-24 2 Z" fill="#3a2b22"/>
+    <rect x="-18" y="22" width="36" height="58" rx="14" fill="#ffc72c"/>
+    <rect x="-15" y="78" width="12" height="44" rx="6" fill="#0a2f70"/>
+    <rect x="3" y="78" width="12" height="44" rx="6" fill="#0a2f70"/>
+  </g>
+
+  <g transform="translate(360,305)">
+    <circle cx="0" cy="0" r="20" fill="#ffd08a"/>
+    <rect x="-15" y="18" width="30" height="50" rx="13" fill="#e35d5d"/>
+    <rect x="-13" y="66" width="11" height="38" rx="5" fill="#0a2f70"/>
+    <rect x="2" y="66" width="11" height="38" rx="5" fill="#0a2f70"/>
+  </g>
+
+  <ellipse cx="280" cy="430" rx="210" ry="14" fill="#d7e2f6"/>
+</svg>
