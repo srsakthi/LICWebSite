@@ -106,6 +106,27 @@ To add a new poster: drop the image file into `Posters/` and add an entry
 to `Posters/posters.json`. No HTML editing required. Clicking a poster
 opens it in the same lightbox used by the gallery.
 
+## 3b. Video section (`Video/`)
+
+The "Watch & Learn" section (below Posters) works the same way, reading
+from `Video/videos.json` and rendering a responsive grid of native
+`<video>` players with built-in controls.
+
+```json
+[
+  {
+    "file": "V1.mp4",
+    "title": "Insurance Awareness — Video 1",
+    "description": "A short video from Sangeetha on LIC and Star Health insurance services in Coimbatore."
+  }
+]
+```
+
+To add a new video: drop the file into `Video/` and add an entry to
+`Video/videos.json`. No HTML editing required. Videos use
+`preload="metadata"` so only a small amount of data loads until a
+visitor presses play, keeping the page fast.
+
 ## 4. Changing contact information
 
 Edit the relevant text/links directly in `index.html`:

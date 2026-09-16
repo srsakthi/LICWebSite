@@ -78,7 +78,7 @@
      Active nav link on scroll
   --------------------------------------------------- */
   function initScrollSpy() {
-    var sections = ["home", "services", "plans", "gallery", "posters", "about", "contact"]
+    var sections = ["home", "services", "plans", "gallery", "posters", "video", "about", "contact"]
       .map(function (id) { return document.getElementById(id); })
       .filter(Boolean);
     var links = document.querySelectorAll(".nav-link");
@@ -359,6 +359,74 @@
   }
 
   /* ---------------------------------------------------
+     Video: load Video/videos.json and build a responsive
+     grid of native <video> players. No video is hardcoded
+     in the HTML.
+  --------------------------------------------------- */
+  function initVideos() {
+    var grid = document.getElementById("video-grid");
+    if (!grid) return;
+
+    fetch("Video/videos.json")
+      .then(function (res) {
+        if (!res.ok) throw new Error("videos.json not found");
+        return res.json();
+      })
+      .then(function (items) {
+        if (!Array.isArray(items) || items.length === 0) {
+          grid.innerHTML = '<p class="gallery-loading">Videos coming soon.</p>';
+          return;
+        }
+        buildVideos(items);
+      })
+      .catch(function () {
+        grid.innerHTML = '<p class="gallery-loading">Videos coming soon.</p>';
+      });
+
+    function buildVideos(items) {
+      grid.innerHTML = "";
+
+      items.forEach(function (item) {
+        var card = document.createElement("div");
+        card.className = "video-card reveal in-view";
+
+        var media = document.createElement("div");
+        media.className = "video-card-media";
+
+        var video = document.createElement("video");
+        video.src = "Video/" + item.file;
+        video.controls = true;
+        video.preload = "metadata";
+        video.playsInline = true;
+        video.setAttribute("aria-label", item.title || "Insurance awareness video");
+        video.onerror = function () {
+          media.textContent = item.title || "Video unavailable";
+        };
+        media.appendChild(video);
+        card.appendChild(media);
+
+        if (item.title || item.description) {
+          var body = document.createElement("div");
+          body.className = "video-card-body";
+          if (item.title) {
+            var h3 = document.createElement("h3");
+            h3.textContent = item.title;
+            body.appendChild(h3);
+          }
+          if (item.description) {
+            var p = document.createElement("p");
+            p.textContent = item.description;
+            body.appendChild(p);
+          }
+          card.appendChild(body);
+        }
+
+        grid.appendChild(card);
+      });
+    }
+  }
+
+  /* ---------------------------------------------------
      Map (Leaflet / OpenStreetMap)
   --------------------------------------------------- */
   function initMap() {
@@ -397,6 +465,7 @@
     initReveal();
     initGallery();
     initPosters();
+    initVideos();
     initMap();
     initMisc();
   });
