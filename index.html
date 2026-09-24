@@ -85,6 +85,10 @@
 
     <div class="header-actions">
       <div class="social-icons" id="header-social" aria-label="Social media links"></div>
+      <a href="account.html" class="account-link" aria-label="My account">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5z"/></svg>
+        <span>Account</span>
+      </a>
       <a href="#contact" class="btn btn-primary btn-sm header-cta">Contact Us</a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav">
         <span></span><span></span><span></span>
@@ -415,6 +419,46 @@
           <a class="btn btn-outline btn-block" id="directions-link" href="https://www.openstreetmap.org/?mlat=11.050407&mlon=76.959133#map=17/11.050407/76.959133" target="_blank" rel="noopener">Get Directions</a>
         </div>
       </div>
+
+      <div class="message-card reveal" id="message">
+        <div class="message-intro">
+          <h3>Send a Message</h3>
+          <p>Have a question about an LIC or Star Health plan? Send it here and Sangeetha will get back to you.</p>
+          <p class="message-note" id="msg-note">Want to follow the conversation online? <a href="account.html">Create a free account or sign in</a> to check replies and ask follow-up questions.</p>
+        </div>
+        <form id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cf-name">Your name</label>
+              <input class="form-control" id="cf-name" type="text" autocomplete="name" maxlength="120" required>
+            </div>
+            <div class="form-group">
+              <label for="cf-phone">Phone <span class="optional">(optional)</span></label>
+              <input class="form-control" id="cf-phone" type="tel" autocomplete="tel" maxlength="20">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cf-email">Email</label>
+            <input class="form-control" id="cf-email" type="email" autocomplete="email" maxlength="254" required>
+          </div>
+          <div class="form-group">
+            <label for="cf-topic">I'm interested in</label>
+            <select class="form-control" id="cf-topic">
+              <option>LIC Insurance</option>
+              <option>Star Health Insurance</option>
+              <option>Policy renewal or claim help</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cf-message">Message</label>
+            <textarea class="form-control" id="cf-message" rows="4" maxlength="4000" required></textarea>
+          </div>
+          <div class="hp-field" aria-hidden="true"><label>Leave this empty <input id="cf-hp" type="text" tabindex="-1" autocomplete="off"></label></div>
+          <button type="submit" class="btn btn-primary">Send message</button>
+          <p class="form-msg" id="cf-msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -444,6 +488,7 @@
         <li><a href="#posters">Posters</a></li>
         <li><a href="#video">Video</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="account.html">My Account</a></li>
       </ul>
     </div>
 
@@ -473,6 +518,7 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="js/config.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

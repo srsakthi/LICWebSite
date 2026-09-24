@@ -427,6 +427,102 @@
   }
 
   /* ---------------------------------------------------
+     Contact form: sends the message to Supabase (see
+     js/config.js). The messaging SDK loads only when the
+     visitor gets near the form.
+  --------------------------------------------------- */
+  function initContactForm() {
+    var form = document.getElementById("contact-form");
+    if (!form || typeof window.getSupabase !== "function") return;
+
+    var msg = document.getElementById("cf-msg");
+    var note = document.getElementById("msg-note");
+    var nameEl = document.getElementById("cf-name");
+    var phoneEl = document.getElementById("cf-phone");
+    var emailEl = document.getElementById("cf-email");
+    var signedInUser = null;
+    var prepared = false;
+
+    function setMsg(text, type) {
+      msg.textContent = text;
+      msg.className = "form-msg" + (type ? " " + type : "");
+    }
+
+    function prepare() {
+      if (prepared) return;
+      prepared = true;
+      window.getSupabase().then(function (sb) {
+        return sb.auth.getSession().then(function (r) {
+          var session = r.data && r.data.session;
+          if (!session) return;
+          signedInUser = session.user;
+          emailEl.value = signedInUser.email;
+          emailEl.readOnly = true;
+          note.textContent = "You're signed in as " + signedInUser.email + ". ";
+          var link = document.createElement("a");
+          link.href = "account.html";
+          link.textContent = "Open My Account";
+          note.appendChild(link);
+          note.appendChild(document.createTextNode(" to read replies."));
+          return sb.from("profiles").select("full_name, phone").eq("id", signedInUser.id).maybeSingle().then(function (p) {
+            if (p.data) {
+              if (!nameEl.value) nameEl.value = p.data.full_name || "";
+              if (!phoneEl.value) phoneEl.value = p.data.phone || "";
+            }
+          });
+        });
+      }).catch(function () { prepared = false; });
+    }
+
+    form.addEventListener("focusin", prepare);
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { prepare(); io.disconnect(); }
+      }, { rootMargin: "400px 0px" });
+      io.observe(form);
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = nameEl.value.trim();
+      var email = emailEl.value.trim();
+      var message = document.getElementById("cf-message").value.trim();
+      var button = form.querySelector("button[type=submit]");
+
+      if (document.getElementById("cf-hp").value) return; // bot trap
+      if (!name) return setMsg("Please enter your name.", "error");
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return setMsg("Please enter a valid email address.", "error");
+      if (!message) return setMsg("Please write a message.", "error");
+
+      button.disabled = true;
+      setMsg("Sending…", "");
+      window.getSupabase().then(function (sb) {
+        return sb.rpc("create_enquiry", {
+          p_name: name,
+          p_email: email,
+          p_phone: phoneEl.value.trim(),
+          p_subject: document.getElementById("cf-topic").value,
+          p_message: message
+        });
+      }).then(function (res) {
+        button.disabled = false;
+        if (res.error) return setMsg(/too many/i.test(res.error.message) ? "Too many messages sent recently. Please try again later or call 95246 08535." : res.error.message, "error");
+        document.getElementById("cf-message").value = "";
+        setMsg("Thank you, " + name + "! Your message has been sent and Sangeetha will get back to you soon.", "success");
+        if (signedInUser) {
+          var a = document.createElement("a");
+          a.href = "account.html?enquiry=" + encodeURIComponent(res.data);
+          a.textContent = " View conversation";
+          msg.appendChild(a);
+        }
+      }).catch(function () {
+        button.disabled = false;
+        setMsg("Sorry, the message could not be sent. Please call 95246 08535 or use WhatsApp.", "error");
+      });
+    });
+  }
+
+  /* ---------------------------------------------------
      Map (Leaflet / OpenStreetMap)
   --------------------------------------------------- */
   function initMap() {
@@ -466,6 +562,7 @@
     initGallery();
     initPosters();
     initVideos();
+    initContactForm();
     initMap();
     initMisc();
   });

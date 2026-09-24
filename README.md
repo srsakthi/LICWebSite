@@ -2,8 +2,9 @@
 
 A fast, mobile-responsive static website for Sangeetha, a LIC and Star Health
 Insurance advisor based in Coimbatore. Built with plain HTML5, CSS3 and
-vanilla JavaScript — no build step, no backend, no database. Ready to deploy
-on GitHub Pages or any static host.
+vanilla JavaScript — no build step and no server of its own. Ready to deploy
+on GitHub Pages or any static host. The optional contact / customer portal
+stores messages in Supabase (see section 8).
 
 ## Project structure
 
@@ -24,6 +25,12 @@ insurance-website/
 │   ├── logo.svg
 │   ├── hero-illustration.svg
 │   └── gallery1.svg … gallery6.svg
+│
+├── account.html            Customer / admin portal (sign in, enquiries, replies)
+│
+├── js/config.js             Supabase URL + publishable key
+├── js/portal.js             Portal logic
+├── supabase/migrations/     Database schema, security rules, admin role
 │
 ├── Posters/
 │   ├── posters.json          Poster manifest (auto-loaded by app.js)
@@ -186,6 +193,70 @@ https://USERNAME.github.io/REPOSITORY/
 
 (Replace `USERNAME` and `REPOSITORY` with your GitHub username and repo
 name.)
+
+## 8. Contact form & customer / admin portal (Supabase)
+
+The home page has a **Send a Message** form, and `account.html` is a portal
+where:
+
+- **Guests** can send a message without an account.
+- **Customers** create an account with their email, then check Sangeetha's
+  replies, answer, or ask follow-up questions in a threaded conversation.
+  Earlier guest messages sent from the same (confirmed) email appear
+  automatically after they sign up.
+- **Admin (Sangeetha)** signs in on the *Admin login* tab and sees every
+  enquiry in an inbox: filter by status, search, read the thread, reply,
+  mark closed / reopen, delete, or reply by email / call.
+
+Everything is stored in Supabase (Postgres + Auth). The website is still fully
+static; the browser talks to Supabase with the **publishable** key in
+`js/config.js`, and Row Level Security in
+`supabase/migrations/20260924000000_contact_portal.sql` decides who can see or
+change what (customers see only their own enquiries; only admins can read
+everything; message senders are set by the database, never by the browser).
+
+### One-time setup
+
+1. **Apply the schema** (already done for project `dhgipmcrdpyphzrgmglu`). To
+   redo it on another project:
+
+   ```bash
+   npx supabase login
+   npx supabase link --project-ref YOUR_PROJECT_REF
+   npx supabase db push
+   ```
+
+   (or paste the migration file into the Supabase dashboard's SQL editor.)
+
+2. **Auth URLs** - Supabase dashboard -> Authentication -> URL Configuration:
+   - Site URL: `https://srsakthi.github.io/LICWebSite/`
+   - Redirect URLs: add `https://srsakthi.github.io/LICWebSite/account.html`
+     (and `http://localhost:8080/account.html` for local testing).
+
+3. **Email delivery** - Supabase's built-in mailer only sends to your own
+   team members and is heavily rate-limited, so **customers will not receive
+   confirmation / password-reset emails until you add a custom SMTP provider**
+   (Authentication -> Emails -> SMTP Settings, e.g. Resend, Brevo or Gmail app
+   password). Keep "Confirm email" turned **on**.
+
+4. **Create Sangeetha's admin account**: open `account.html`, use
+   **Create account** with `srsakthi2014@gmail.com`, confirm the email, then run
+   this once in the dashboard SQL editor:
+
+   ```sql
+   insert into public.admins (user_id)
+   select id from auth.users where email = 'srsakthi2014@gmail.com';
+   ```
+
+   After that, sign in on the **Admin login** tab.
+
+### Security notes
+
+- Only the publishable key belongs in this repo. **Never commit the database
+  password, a `secret` / `service_role` key, or a `.env` file.**
+- Nobody can make themselves admin from the website; the `admins` table can only
+  be changed with SQL.
+- Guest messages are rate-limited per email and validated in the database.
 
 ## Configuration values to update before publishing
 

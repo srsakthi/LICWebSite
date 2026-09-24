@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account - Sangeetha Insurance Advisor</title>
+<meta name="description" content="Sign in to message Sangeetha, check replies and follow up on your LIC and Star Health insurance enquiries.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="portal-page">
+
+<header class="site-header scrolled">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" aria-label="Sangeetha - Home">
+      <img src="images/logo.svg" alt="Sangeetha Insurance Advisor logo" class="brand-logo" width="44" height="44">
+      <span class="brand-text">
+        <span class="brand-name">Sangeetha</span>
+        <span class="brand-tag">LIC &amp; Star Health Advisor</span>
+      </span>
+    </a>
+    <div class="header-actions">
+      <a href="index.html" class="btn btn-outline btn-sm">&larr; Back to website</a>
+      <button type="button" class="btn btn-primary btn-sm" id="btn-signout" hidden>Sign out</button>
+    </div>
+  </div>
+</header>
+
+<main class="portal">
+  <div class="container">
+
+    <p class="portal-loading" id="view-loading">Loading&hellip;</p>
+
+    <!-- Sign in / create account / admin login -->
+    <section class="auth-card" id="view-auth" hidden>
+      <h1>My Account</h1>
+      <p class="auth-lead">Sign in to send Sangeetha a message, check her replies and ask follow-up questions.</p>
+
+      <div class="tabs" role="tablist" aria-label="Account options">
+        <button type="button" class="tab active" role="tab" aria-selected="true" data-mode="signin">Sign in</button>
+        <button type="button" class="tab" role="tab" aria-selected="false" data-mode="signup">Create account</button>
+        <button type="button" class="tab" role="tab" aria-selected="false" data-mode="admin">Admin login</button>
+      </div>
+
+      <form id="form-signin" class="auth-form" novalidate>
+        <div class="form-group">
+          <label for="si-email">Email</label>
+          <input class="form-control" id="si-email" type="email" autocomplete="email" required>
+        </div>
+        <div class="form-group">
+          <label for="si-password">Password</label>
+          <input class="form-control" id="si-password" type="password" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+        <button type="button" class="link-btn" id="btn-forgot">Forgot password?</button>
+      </form>
+
+      <form id="form-signup" class="auth-form" hidden novalidate>
+        <div class="form-group">
+          <label for="su-name">Full name</label>
+          <input class="form-control" id="su-name" type="text" autocomplete="name" maxlength="120" required>
+        </div>
+        <div class="form-group">
+          <label for="su-phone">Phone <span class="optional">(optional)</span></label>
+          <input class="form-control" id="su-phone" type="tel" autocomplete="tel" maxlength="20">
+        </div>
+        <div class="form-group">
+          <label for="su-email">Email</label>
+          <input class="form-control" id="su-email" type="email" autocomplete="email" required>
+        </div>
+        <div class="form-group">
+          <label for="su-password">Password <span class="optional">(at least 8 characters)</span></label>
+          <input class="form-control" id="su-password" type="password" autocomplete="new-password" minlength="8" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Create account</button>
+        <p class="form-hint">We'll email you a link to confirm your address. Any earlier message you sent from this email will appear in your account.</p>
+      </form>
+
+      <form id="form-admin" class="auth-form" hidden novalidate>
+        <p class="form-hint">For Sangeetha only. Customers should use <strong>Sign in</strong>.</p>
+        <div class="form-group">
+          <label for="ad-email">Admin email</label>
+          <input class="form-control" id="ad-email" type="email" autocomplete="email" required>
+        </div>
+        <div class="form-group">
+          <label for="ad-password">Password</label>
+          <input class="form-control" id="ad-password" type="password" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Admin sign in</button>
+      </form>
+
+      <form id="form-forgot" class="auth-form" hidden novalidate>
+        <p class="form-hint">Enter your email and we'll send you a link to choose a new password.</p>
+        <div class="form-group">
+          <label for="fp-email">Email</label>
+          <input class="form-control" id="fp-email" type="email" autocomplete="email" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Send reset link</button>
+        <button type="button" class="link-btn" id="btn-forgot-back">Back to sign in</button>
+      </form>
+
+      <p class="form-msg" id="auth-msg" role="status" aria-live="polite"></p>
+      <button type="button" class="link-btn" id="btn-resend" hidden>Resend confirmation email</button>
+    </section>
+
+    <!-- Choose a new password (from the reset email link) -->
+    <section class="auth-card" id="view-recovery" hidden>
+      <h1>Choose a new password</h1>
+      <form id="form-recovery" class="auth-form" novalidate>
+        <div class="form-group">
+          <label for="rc-password">New password <span class="optional">(at least 8 characters)</span></label>
+          <input class="form-control" id="rc-password" type="password" autocomplete="new-password" minlength="8" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save password</button>
+      </form>
+      <p class="form-msg" id="recovery-msg" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Signed-in area -->
+    <section id="view-app" hidden>
+      <div class="portal-top">
+        <div>
+          <h1 id="app-title">My enquiries</h1>
+          <p class="portal-user"><span id="app-user"></span> <span class="role-pill" id="app-role"></span></p>
+        </div>
+        <div class="portal-top-actions">
+          <button type="button" class="btn btn-outline btn-sm" id="btn-refresh">Refresh</button>
+          <button type="button" class="btn btn-primary btn-sm" id="btn-new">New enquiry</button>
+        </div>
+      </div>
+
+      <div class="portal-layout" id="portal-layout">
+        <aside class="portal-list" aria-label="Enquiries">
+          <div class="list-tools" id="list-tools" hidden>
+            <div class="chips" id="filter-chips" role="group" aria-label="Filter by status">
+              <button type="button" class="chip active" data-filter="all">All</button>
+              <button type="button" class="chip" data-filter="open">Needs reply</button>
+              <button type="button" class="chip" data-filter="answered">Answered</button>
+              <button type="button" class="chip" data-filter="closed">Closed</button>
+            </div>
+            <input class="form-control" id="list-search" type="search" placeholder="Search name, email or subject" aria-label="Search enquiries">
+          </div>
+          <ul class="enquiry-list" id="enquiry-list"></ul>
+          <p class="list-empty" id="list-empty" hidden></p>
+        </aside>
+
+        <section class="portal-detail" aria-live="polite">
+          <div class="detail-empty" id="detail-empty">
+            <p>Select an enquiry to read the conversation.</p>
+          </div>
+
+          <div id="detail-new" hidden>
+            <button type="button" class="link-btn back-btn" data-back>&larr; Back</button>
+            <h2>New enquiry</h2>
+            <form id="form-new" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="nw-name">Your name</label>
+                  <input class="form-control" id="nw-name" type="text" maxlength="120" required>
+                </div>
+                <div class="form-group">
+                  <label for="nw-phone">Phone <span class="optional">(optional)</span></label>
+                  <input class="form-control" id="nw-phone" type="tel" maxlength="20">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="nw-topic">Topic</label>
+                <select class="form-control" id="nw-topic">
+                  <option>LIC Insurance</option>
+                  <option>Star Health Insurance</option>
+                  <option>Policy renewal or claim help</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="nw-message">Message</label>
+                <textarea class="form-control" id="nw-message" rows="5" maxlength="4000" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Send message</button>
+              <p class="form-msg" id="new-msg" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div id="detail-thread" hidden>
+            <button type="button" class="link-btn back-btn" data-back>&larr; All enquiries</button>
+            <div class="thread-head">
+              <div>
+                <h2 id="th-subject"></h2>
+                <p class="thread-contact" id="th-contact"></p>
+              </div>
+              <span class="badge" id="th-status"></span>
+            </div>
+            <div class="admin-actions" id="admin-actions" hidden>
+              <a class="btn btn-outline btn-sm" id="act-mail" href="#">Reply by email</a>
+              <a class="btn btn-outline btn-sm" id="act-call" href="#" hidden>Call</a>
+              <button type="button" class="btn btn-outline btn-sm" id="act-close">Mark closed</button>
+              <button type="button" class="btn btn-outline btn-sm danger" id="act-delete">Delete</button>
+            </div>
+            <div class="messages" id="messages"></div>
+            <form id="form-reply" novalidate>
+              <label class="sr-only" for="rp-body">Your reply</label>
+              <textarea class="form-control" id="rp-body" rows="3" maxlength="4000" placeholder="Write your reply&hellip;" required></textarea>
+              <div class="reply-row">
+                <button type="submit" class="btn btn-primary btn-sm">Send reply</button>
+                <span class="form-msg" id="reply-msg" role="status" aria-live="polite"></span>
+              </div>
+            </form>
+            <p class="closed-note" id="closed-note" hidden>This conversation is closed. Start a new enquiry if you need more help.</p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/portal.js"></script>
+</body>
+</html>
