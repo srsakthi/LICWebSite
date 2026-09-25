@@ -1,7 +1,7 @@
 # Sangeetha — LIC & Star Health Insurance Advisor Website
 
-A fast, mobile-responsive static website for Sangeetha, a LIC and Star Health
-Insurance advisor based in Coimbatore. Built with plain HTML5, CSS3 and
+A fast, mobile-responsive static website for Sangeetha, a LIC, Star Health and
+Galaxy Health Insurance advisor based in Coimbatore. Built with plain HTML5, CSS3 and
 vanilla JavaScript — no build step and no server of its own. Ready to deploy
 on GitHub Pages or any static host. The optional contact / customer portal
 stores messages in Supabase (see section 8).

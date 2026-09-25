@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-labelledby="g7t">
+  <title id="g7t">Personal accident protection illustration</title>
+  <defs>
+    <linearGradient id="bg7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fdeaf9"/><stop offset="100%" stop-color="#f6d0ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg7)"/>
+  <circle cx="400" cy="300" r="160" fill="#ffffff" opacity="0.6"/>
+  <g transform="translate(400,300)">
+    <path d="M0 -120 L110 -80 V0 C110 70 55 115 0 140 C-55 115 -110 70 -110 0 V-80 Z" fill="#8e1279"/>
+    <rect x="-14" y="-45" width="28" height="90" rx="6" fill="#ffffff"/>
+    <rect x="-45" y="-14" width="90" height="28" rx="6" fill="#ffffff"/>
+  </g>
+  <text x="400" y="565" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="26" font-weight="600" fill="#0a2f70">Personal Accident Protection</text>
+</svg>

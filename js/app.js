@@ -1,5 +1,5 @@
 /* =========================================================
-   Sangeetha - LIC & Star Health Insurance Advisor
+   Sangeetha - LIC, Star Health & Galaxy Health Insurance Advisor
    Vanilla JS: navigation, gallery, map, animations
    ========================================================= */
 (function () {
@@ -540,7 +540,7 @@
     }).addTo(map);
 
     var marker = L.marker([lat, lng]).addTo(map);
-    marker.bindPopup("<strong>Sangeetha</strong><br>LIC &amp; Star Health Insurance Advisor<br>Nallampalayam, Coimbatore");
+    marker.bindPopup("<strong>Sangeetha</strong><br>LIC, Star Health &amp; Galaxy Health Insurance Advisor<br>Nallampalayam, Coimbatore");
 
     mapEl.addEventListener("click", function () { map.scrollWheelZoom.enable(); });
     mapEl.addEventListener("mouseleave", function () { map.scrollWheelZoom.disable(); });
