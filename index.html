@@ -382,8 +382,18 @@
         <p class="section-desc">LIC, Star Health and Galaxy Health plan posters shared by Sangeetha. Click any poster for a closer look.</p>
       </div>
 
-      <div class="grid poster-grid" id="poster-grid">
-        <p class="gallery-loading">Loading posters&hellip;</p>
+      <div class="carousel reveal">
+        <button type="button" class="gallery-nav" id="poster-prev" aria-label="Previous posters">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="carousel-viewport" id="poster-viewport" role="region" aria-label="Posters" tabindex="0">
+          <div class="rail poster-grid" id="poster-grid" style="--rows:2">
+            <p class="gallery-loading">Loading posters&hellip;</p>
+          </div>
+        </div>
+        <button type="button" class="gallery-nav" id="poster-next" aria-label="Next posters">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -397,8 +407,18 @@
         <p class="section-desc">Short videos from Sangeetha on LIC, Star Health and Galaxy Health insurance planning.</p>
       </div>
 
-      <div class="grid video-grid" id="video-grid">
-        <p class="gallery-loading">Loading videos&hellip;</p>
+      <div class="carousel reveal">
+        <button type="button" class="gallery-nav" id="video-prev" aria-label="Previous videos">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="carousel-viewport" id="video-viewport" role="region" aria-label="Videos" tabindex="0">
+          <div class="rail video-grid" id="video-grid" style="--rows:2">
+            <p class="gallery-loading">Loading videos&hellip;</p>
+          </div>
+        </div>
+        <button type="button" class="gallery-nav" id="video-next" aria-label="Next videos">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
     </div>
   </section>

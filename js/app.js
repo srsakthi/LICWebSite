@@ -285,6 +285,76 @@
   }
 
   /* ---------------------------------------------------
+     Auto-scrolling rail (posters + video). Scrolls
+     left to right on its own, pauses on hover / touch /
+     focus / while a video plays, supports swipe, drag
+     and the prev/next buttons, then rewinds to the start.
+     The number of rows is the --rows CSS variable on the
+     rail (set in index.html).
+  --------------------------------------------------- */
+  function attachAutoScroll(viewport, prevBtn, nextBtn, isBusy) {
+    var speed = 0.6;
+    var pos = 0;
+    var lastSet = 0;
+    var hovering = false;
+    var touching = false;
+    var focused = false;
+    var visible = true;
+    var state = "scrolling"; // scrolling -> holdEnd -> rewinding -> holdStart -> scrolling
+    var until = 0;
+    var pausedUntil = 0;
+
+    function maxScroll() { return viewport.scrollWidth - viewport.clientWidth; }
+    function pauseFor(ms) { pausedUntil = Date.now() + ms; }
+
+    viewport.addEventListener("scroll", function () {
+      if (state !== "rewinding" && Math.abs(viewport.scrollLeft - lastSet) > 2) pos = viewport.scrollLeft;
+    }, { passive: true });
+
+    viewport.addEventListener("mouseenter", function () { hovering = true; });
+    viewport.addEventListener("mouseleave", function () { hovering = false; });
+    viewport.addEventListener("touchstart", function () { touching = true; }, { passive: true });
+    viewport.addEventListener("touchend", function () { touching = false; pauseFor(2500); }, { passive: true });
+    viewport.addEventListener("focusin", function () { focused = true; });
+    viewport.addEventListener("focusout", function () { focused = false; });
+
+    function nudge(direction) {
+      pauseFor(3500);
+      viewport.scrollBy({ left: direction * viewport.clientWidth * 0.8, behavior: "smooth" });
+    }
+    prevBtn.addEventListener("click", function () { nudge(-1); });
+    nextBtn.addEventListener("click", function () { nudge(1); });
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; }).observe(viewport);
+    }
+    if (prefersReducedMotion) return;
+
+    function step() {
+      var now = Date.now();
+      var blocked = hovering || touching || focused || !visible || now < pausedUntil || isBusy();
+      var max = maxScroll();
+
+      if (!blocked && max > 1) {
+        if (state === "scrolling") {
+          pos += speed;
+          if (pos >= max) { pos = max; state = "holdEnd"; until = now + 1500; }
+          lastSet = pos;
+          viewport.scrollLeft = pos;
+        } else if (state === "holdEnd") {
+          if (now >= until) { state = "rewinding"; viewport.scrollTo({ left: 0, behavior: "smooth" }); }
+        } else if (state === "rewinding") {
+          if (viewport.scrollLeft <= 1) { state = "holdStart"; until = now + 1200; pos = 0; lastSet = 0; }
+        } else if (now >= until) {
+          state = "scrolling";
+        }
+      }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ---------------------------------------------------
      Posters: load Posters/posters.json and build a
      responsive grid; clicking a poster opens the shared
      lightbox. No poster is hardcoded in the HTML.
@@ -355,6 +425,13 @@
 
         grid.appendChild(card);
       });
+
+      attachAutoScroll(
+        document.getElementById("poster-viewport"),
+        document.getElementById("poster-prev"),
+        document.getElementById("poster-next"),
+        function () { return false; }
+      );
     }
   }
 
@@ -423,6 +500,17 @@
 
         grid.appendChild(card);
       });
+
+      attachAutoScroll(
+        document.getElementById("video-viewport"),
+        document.getElementById("video-prev"),
+        document.getElementById("video-next"),
+        function () {
+          var vids = grid.querySelectorAll("video");
+          for (var i = 0; i < vids.length; i++) if (!vids[i].paused && !vids[i].ended) return true;
+          return false;
+        }
+      );
     }
   }
 

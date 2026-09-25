@@ -113,6 +113,12 @@ To add a new poster: drop the image file into `Posters/` and add an entry
 to `Posters/posters.json`. No HTML editing required. Clicking a poster
 opens it in the same lightbox used by the gallery.
 
+Posters (and videos) are laid out in **2 rows** that scroll sideways on their
+own, pause on hover / touch / focus, can be swiped or dragged, have prev/next
+buttons, and rewind to the start after the last item. To change the number of
+rows, edit `style="--rows:2"` on `#poster-grid` / `#video-grid` in `index.html`
+(for example `--rows:3`). The video rail also pauses while a video is playing.
+
 ## 3b. Video section (`Video/`)
 
 The "Watch & Learn" section (below Posters) works the same way, reading
